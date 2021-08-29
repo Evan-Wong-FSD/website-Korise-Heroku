@@ -8,11 +8,12 @@ const { JSDOM } = require('jsdom')
 const { window } = new JSDOM('')
 const $ = require('jquery')(window)
 const history = require('connect-history-api-fallback')
+const serveStatic = require('serve-static')
 
 console.log(111111111111)
 
 app.use(history())
-// app.use(express.static(__dirname+'/public/dist/spa'))
+app.use(serveStatic(__dirname+'/public/dist/spa'))
 app.use(express.json())
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
@@ -24,7 +25,7 @@ app.all('*', function (req, res, next) {
 
 const server = app.listen(port, (err) => {
   if (!err) {
-    console.log('Server on !')
+    console.log(`Server on !`)
   }
 })
 
