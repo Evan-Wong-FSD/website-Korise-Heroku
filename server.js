@@ -22,7 +22,11 @@ app.all('*', function (req, res, next) {
   next()
 })
 
-const server = app.listen(port)
+const server = app.listen(port, (err) => {
+  if (!err) {
+    console.log('Server on !')
+  }
+})
 
 const io = require('socket.io').listen(server)
 io.on('connection', function (socket) {
